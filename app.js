@@ -11,10 +11,8 @@ console.log(document.cookie);
  * @returns {string[]}
  */
 function getCookies() {
-    let cookies = document.cookie.split(';');
-    return cookies.map(cookie => cookie.trim());
+    return document.cookie.split(';').map(cookie => cookie.trim());
 }
-
 
 /**
  * TODO Cette fonction doit permettre de créer un nouveau cookie avec le nom et la valeur au choix !
@@ -24,8 +22,9 @@ function getCookies() {
 function setCookie(cookieName, cookieValue) {
     // Le cookie doit être valide 2 jours et doit respecter les normes de sécurité contre les failles CSRF.
     // Votre code ici.
+    document.cookie = cookieName + "=" + cookieValue + "; path=/; domain=localhost; max-age=172800000 secure; samesite=strict";
+    return document.cookie;
 }
-
 
 /**
  * TODO Cette fonction doit retourner la valeur du nom du cookie passé en paramètre.
@@ -33,14 +32,15 @@ function setCookie(cookieName, cookieValue) {
  */
 function getCookie(cookieName) {
     // Votre code ici.
+    document.cookie = cookieName;
+    return document.cookie;
 }
 
 
 console.log(getCookies());
 
 // FIXME Test de setCookie()
-setCookie('monCookie', 'maValeur');
-console.log(getCookies());
+console.log(setCookie('monCookie', 'maValeur'));
 
 // FIXME test de getCookie(param)
-console.log(getCookies('monCookie'));
+console.log(getCookie('monCookie'));
